@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "adjinfuserfix",
+	"version": "${version}",
+	"name": "ADJ Infuser Fix",
+	"description": "Better compatibility between the mods Sortilege and Enchanting Infuser",
+	"authors": [
+		"kohara"
+	],
+	"contact": {},
+	"license": "All-Rights-Reserved",
+	"icon": "assets/adjinfuserfix/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-datagen": [
+			"xyz.kohara.adjinfuserfix.client.ADJInfuserFixDataGenerator"
+		],
+		"client": [
+			"xyz.kohara.adjinfuserfix.client.ADJInfuserFixClient"
+		],
+		"main": [
+			"xyz.kohara.adjinfuserfix.ADJInfuserFix"
+		]
+	},
+	"mixins": [
+		"adjinfuserfix.mixins.json",
+		{
+			"config": "adjinfuserfix.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"fabric": "*",
+		"minecraft": "${minecraft_version}",
+		"sortilege": ">=1.6.4",
+		"enchantinginfuser": ">=8.0.3"
+	}
+}
