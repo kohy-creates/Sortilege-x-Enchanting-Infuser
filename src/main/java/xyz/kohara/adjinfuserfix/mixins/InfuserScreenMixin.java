@@ -17,25 +17,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
 
-@Mixin(InfuserMenu.class)
+@Mixin(value = InfuserMenu.class, remap = false)
 public class InfuserScreenMixin {
 
-    @Shadow @Final private Container enchantSlots;
+	@Shadow
+	@Final
+	private Container enchantSlots;
 
-    @Shadow private Map<Enchantment, Integer> enchantments;
+	@Shadow
+	private Map<Enchantment, Integer> enchantments;
 
-    @Inject(
-            method = "clickEnchantButton",
-            at = @At("HEAD"),
-            cancellable = true)
-    private void clickEnchantButton(Player player, CallbackInfoReturnable<Boolean> cir) {
-        ItemStack itemStack = this.enchantSlots.getItem(0);
-        int selectedEnchantments = (int) this.enchantments.values().stream()
-                .filter(value -> value != 0)
-                .count();
-        if (selectedEnchantments > (ItemHelper.getTotalEnchantSlots(itemStack) - ItemHelper.getUsedEnchantSlots(itemStack))) {
-            player.sendSystemMessage(Component.literal("Tᴏᴏ ᴍᴀɴʏ sᴇʟᴇᴄᴛᴇᴅ ᴇɴᴄʜᴀɴᴛᴍᴇɴᴛs!").withStyle(ChatFormatting.RED));
-            cir.setReturnValue(false);
-        }
-    }
+	@Inject(
+			method = "clickEnchantButton",
+			at = @At("HEAD"),
+			cancellable = true)
+	private void clickEnchantButton(Player player, CallbackInfoReturnable<Boolean> cir) {
+		ItemStack itemStack = enchantSlots.getItem(0);
+		int selectedEnchantments = (int) enchantments.values().stream()
+				.filter(value -> value != 0)
+				.count();
+		if (selectedEnchantments > (ItemHelper.getTotalEnchantSlots(itemStack) - ItemHelper.getUsedEnchantSlots(itemStack))) {
+			player.sendSystemMessage(Component.literal("Tᴏᴏ ᴍᴀɴʏ sᴇʟᴇᴄᴛᴇᴅ ᴇɴᴄʜᴀɴᴛᴍᴇɴᴛs!").withStyle(ChatFormatting.RED));
+			cir.setReturnValue(false);
+		}
+	}
 }

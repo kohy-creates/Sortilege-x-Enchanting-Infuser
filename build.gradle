@@ -36,6 +36,23 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
+    maven {
+        name = "JitpackASM"
+        url 'https://jitpack.io'
+    }
+
+    maven {
+        name = "TerraformersMC"
+        url "https://maven.terraformersmc.com/"
+    }
 }
 
 dependencies {
@@ -46,13 +63,12 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modCompileOnly files('libs/EnchantingInfuser-v8.0.3-1.20.1-Fabric.jar')
-    modCompileOnly files('libs/ForgeConfigAPIPort-v8.0.2-1.20.1-Fabric.jar')
-    modCompileOnly files('libs/Sortilege-1.20.1-1.6.4.jar')
+    modImplementation "curse.maven:enchanting-infuser-551151:5528722"
+    modImplementation "curse.maven:puzzles-lib-495476:6918566"
+    modImplementation "curse.maven:forge-config-api-port-547434:7260491"
+    modImplementation "curse.maven:sortilege-882488:7861531"
 
-    modRuntimeOnly files('libs/EnchantingInfuser-v8.0.3-1.20.1-Fabric.jar')
-    modRuntimeOnly files('libs/ForgeConfigAPIPort-v8.0.2-1.20.1-Fabric.jar')
-    modRuntimeOnly files('libs/Sortilege-1.20.1-1.6.4.jar')
+    modImplementation "com.github.Chocohead:Fabric-ASM:v${project.fabric_asm_version}"
 }
 
 processResources {

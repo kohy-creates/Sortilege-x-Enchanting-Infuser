@@ -1,0 +1,8 @@
+package xyz.kohara.adjinfuserfix.mixins;
+
+import net.minecraft.world.entity.ExperienceOrb;
+import org.spongepowered.asm.mixin.Mixin;
+
+@Mixin(ExperienceOrb.class)
+public class ExperienceOrbEntityMixin {
+}
